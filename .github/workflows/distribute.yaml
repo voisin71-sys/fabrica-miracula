@@ -1,0 +1,31 @@
+# Distribution automatique du site vers X / Facebook / Instagram
+# Déclenché à la fin du déploiement Pages (needs: deploy du workflow hugo.yaml).
+name: Distribute to social
+
+on:
+  workflow_run:
+    workflows: ["Deploy Hugo site to Pages"]
+    types: [completed]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  distribute:
+    # Ne tourne que si le déploiement a réussi
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v4
+
+      - name: Diffuser le dernier article
+        env:
+          SITE_URL: "https://voisin71-sys.github.io/fabrica-miracula/"
+          X_API_BEARER_TOKEN: ${{ secrets.X_API_BEARER_TOKEN }}
+          META_ACCESS_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
+          META_FB_PAGE_ID: ${{ secrets.META_FB_PAGE_ID }}
+          META_IG_USER_ID: ${{ secrets.META_IG_USER_ID }}
+          META_IG_DEFAULT_IMAGE: ${{ secrets.META_IG_DEFAULT_IMAGE }}
+        run: python3 scripts/distribute.py
