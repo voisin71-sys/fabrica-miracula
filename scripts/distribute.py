@@ -34,7 +34,7 @@ RSS_URL = SITE_URL.rstrip("/") + "/index.xml"
 STATE_FILE = Path(os.environ.get("GITHUB_WORKSPACE", ".")) / ".distribute_state.json"
 
 # Limites de caractères par réseau
-LIMITS = {"x": 280, "facebook": 63206, "instagram": 2200}
+LIMITS = {"x": 280, "facebook": 63206, "instagram": 2200, "linkedin": 3000}
 
 
 def log(msg):
@@ -242,6 +242,60 @@ def post_meta(message, network):
         return False
 
 
+def post_linkedin(message, link):
+    """LinkedIn via l'API UGC Posts (v2).
+
+    Nécessite LINKEDIN_ACCESS_TOKEN (token d'application avec permission
+    w_member_social) et LINKEDIN_USER_ID (URN de l'utilisateur, ex.
+    urn:li:person:ABCDEFG). Le message est publié avec le lien en commentaire.
+    """
+    token = os.environ.get("LINKEDIN_ACCESS_TOKEN")
+    if not token:
+        log("LinkedIn : clé LINKEDIN_ACCESS_TOKEN absente — réseau ignoré.")
+        return False
+    user_id = os.environ.get("LINKEDIN_USER_ID")
+    if not user_id:
+        # Accepter une valeur courte ; on préfixe l'URN si besoin
+        log("LinkedIn : LINKEDIN_USER_ID absent — réseau ignoré.")
+        return False
+    if not user_id.startswith("urn:li:"):
+        user_id = f"urn:li:person:{user_id}"
+
+    payload = {
+        "author": user_id,
+        "lifecycleState": "PUBLISHED",
+        "specificContent": {
+            "com.linkedin.ugc.ShareContent": {
+                "shareCommentary": {"text": message},
+                "shareMediaCategory": "ARTICLE",
+                "media": [{
+                    "status": "READY",
+                    "originalUrl": link,
+                }],
+            }
+        },
+        "visibility": {"com.linkedin.ugc.MemberNetworkVisibility": "PUBLIC"},
+    }
+    url = "https://api.linkedin.com/v2/ugcPosts"
+    body = json.dumps(payload).encode("utf-8")
+    req = urllib.request.Request(
+        url, data=body, headers={
+            "Authorization": f"Bearer {token}",
+            "Content-Type": "application/json",
+            "X-Restli-Protocol-Version": "2.0.0",
+        }, method="POST",
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=20) as r:
+            data = json.loads(r.read().decode("utf-8"))
+            log(f"LinkedIn : publication OK (id={data.get('id')})")
+            return True
+    except urllib.error.HTTPError as e:
+        detail = e.read().decode("utf-8", "ignore")[:200]
+        log(f"LinkedIn : erreur HTTP {e.code} — {detail}")
+        return False
+
+
 def main():
     dry_run = os.environ.get("DISTRIBUTE_DRY_RUN", "0") == "1" or "--dry-run" in sys.argv
     log(f"Lecture du flux : {RSS_URL}")
@@ -264,7 +318,7 @@ def main():
         log(f"Déjà diffusé (guid={guid}). Rien à faire.")
         return
 
-    networks = ["x", "facebook", "instagram"]
+    networks = ["x", "facebook", "instagram", "linkedin"]
     for net in networks:
         msg = build_message(title, link, desc, net)
         if dry_run:
@@ -272,6 +326,8 @@ def main():
             continue
         if net == "x":
             post_x(msg)
+        elif net == "linkedin":
+            post_linkedin(msg, link)
         else:
             post_meta(msg, net)
         time.sleep(2)  # courtoisie anti-rate-limit

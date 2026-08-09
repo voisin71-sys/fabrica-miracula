@@ -40,6 +40,19 @@ New repository secret*.
 5. Niveau d'accès : Free ≈ 1 500 posts/mois sur votre compte ; Basic ≈ 100 $/mois.
 6. Déclarez les 4 secrets `X_*` dans GitHub (voir §C).
 
+### C. LinkedIn — API UGC Posts (v2)
+
+1. https://www.linkedin.com/developers/ → *Create app* (type « Share on LinkedIn »).
+2. Onglet *Auth* : générez un **Access Token** avec la permission
+   `w_member_social` (et `r_liteprofile` pour récupérer votre ID).
+3. Votre **User ID** (URN) : `GET https://api.linkedin.com/v2/me` avec le token
+   → `id` ; l'URN complet est `urn:li:person:{id}` (le script ajoute le préfixe
+   si vous ne fournissez que l'id).
+4. Secrets : `LINKEDIN_ACCESS_TOKEN`, `LINKEDIN_USER_ID`.
+5. ⚠️ Le token LinkedIn est de **courte durée** (généralement 60 jours) : il
+   faudra le renouveler manuellement, ou mettre en place un flux OAuth2 avec
+   refresh token (hors périmètre de ce script stdlib).
+
 ### B. Meta — Facebook + Instagram (Graph API)
 
 1. https://developers.facebook.com → connectez-vous.

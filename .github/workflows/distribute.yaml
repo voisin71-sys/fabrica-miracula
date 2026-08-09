@@ -31,4 +31,6 @@ jobs:
           META_FB_PAGE_ID: ${{ secrets.META_FB_PAGE_ID }}
           META_IG_USER_ID: ${{ secrets.META_IG_USER_ID }}
           META_IG_DEFAULT_IMAGE: ${{ secrets.META_IG_DEFAULT_IMAGE }}
+          LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
+          LINKEDIN_USER_ID: ${{ secrets.LINKEDIN_USER_ID }}
         run: python3 scripts/distribute.py
