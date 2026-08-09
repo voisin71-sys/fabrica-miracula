@@ -1,0 +1,57 @@
+# ─────────────────────────────────────────────────────────────
+# Fabrica Miracula — Configuration Hugo (thème PaperMod)
+# Site statique souverain : Hugo + GitHub Pages
+# ─────────────────────────────────────────────────────────────
+
+baseURL      = "https://voisin71-sys.github.io/fabrica-miracula/"
+locale       = "fr"
+title        = "Fabrica Miracula"
+theme        = "PaperMod"
+paginate     = 7
+enableGitInfo = true
+
+# Sections principales affichées sur la page d'accueil
+[params]
+  env        = "production"
+  description = "Fabriquer sa souveraineté numérique : réflexions et tutoriels sur Hermes Agent, la sécurité et les réseaux locaux."
+  author      = "Fabrica Miracula"
+  keywords    = ["souveraineté", "Hermes Agent", "sécurité", "réseaux locaux", "auto-hébergement"]
+  defaultTheme = "auto"           # auto | light | dark
+  disableThemeToggle = false
+
+  # Moteur de recherche / options d'affichage
+  ShowReadingTime   = true
+  ShowShareButtons  = true
+  ShowPostNavLinks  = true
+  ShowBreadCrumbs   = true
+  ShowCodeCopyButtons = true
+
+  [params.homeInfoParams]
+    Title    = "Fabrica Miracula"
+    Content  = "<p>Bienvenue dans l'atelier. Ici, nous <strong>fabriquons</strong> des solutions concrètes pour reprendre la main sur notre outil numérique : réflexions sur la souveraineté, sécurité, et mise en réseau locale autour de <em>Hermes Agent</em>.</p><p>Un miracle, c'est une technique que l'on ne maîtrise pas encore.</p>"
+
+  # Liens sociaux affichés dans l'en-tête
+  [params.socialIcons]
+    github  = "https://github.com/voisin71-sys/fabrica-miracula"
+    x       = "https://x.com/"
+    rss     = "https://voisin71-sys.github.io/fabrica-miracula/index.xml"
+
+# Menu principal
+[[menu.main]]
+  name   = "Accueil"
+  url    = "/"
+  weight = 1
+
+[[menu.main]]
+  name   = "Articles"
+  url    = "/posts/"
+  weight = 2
+
+[[menu.main]]
+  name   = "À propos"
+  url    = "/about/"
+  weight = 3
+
+# Réglages du serveur de prévisualisation local
+[server]
+  port = 1313
