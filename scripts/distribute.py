@@ -19,6 +19,9 @@ import os
 import sys
 import json
 import time
+import base64
+import hmac
+import hashlib
 import html
 import urllib.request
 import urllib.error
@@ -119,18 +122,63 @@ def save_state(state):
 # ----------------------------------------------------------------------------
 
 def post_x(message):
-    """X (Twitter) via l'API v2 — nécessite X_API_BEARER_TOKEN (app auth)."""
-    token = os.environ.get("X_API_BEARER_TOKEN")
-    if not token:
-        log("X : clé X_API_BEARER_TOKEN absente — réseau ignoré.")
+    """X (Twitter) via l'API v2 avec OAuth 1.0a (user context) — permet de poster.
+
+    Nécessite 4 secrets :
+      X_API_KEY, X_API_KEY_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET
+    """
+    ck = os.environ.get("X_API_KEY")
+    cs = os.environ.get("X_API_KEY_SECRET")
+    at = os.environ.get("X_ACCESS_TOKEN")
+    ats = os.environ.get("X_ACCESS_TOKEN_SECRET")
+    missing = [n for n, v in (("X_API_KEY", ck), ("X_API_KEY_SECRET", cs),
+                              ("X_ACCESS_TOKEN", at), ("X_ACCESS_TOKEN_SECRET", ats)) if not v]
+    if missing:
+        log(f"X : clés manquantes {missing} — réseau ignoré.")
         return False
+
+    # Garanties non-None après le filtre ci-dessus
+    ck_s: str = ck  # type: ignore[assignment]
+    cs_s: str = cs  # type: ignore[assignment]
+    at_s: str = at  # type: ignore[assignment]
+    ats_s: str = ats  # type: ignore[assignment]
+
     url = "https://api.twitter.com/2/tweets"
     body = json.dumps({"text": message}).encode("utf-8")
+    method = "POST"
+    # Paramètres pour la signature OAuth 1.0a
+    oauth_params = {
+        "oauth_consumer_key": ck_s,
+        "oauth_token": at_s,
+        "oauth_signature_method": "HMAC-SHA1",
+        "oauth_timestamp": str(int(time.time())),
+        "oauth_nonce": os.urandom(16).hex(),
+        "oauth_version": "1.0",
+    }
+    # Base string = method & url & (paramètres triés urlencodés)
+    param_str = "&".join(
+        f"{urllib.parse.quote(k, safe='')}={urllib.parse.quote(v, safe='')}"
+        for k, v in sorted(oauth_params.items())
+    )
+    base = "&".join([
+        method,
+        urllib.parse.quote(url, safe=""),
+        urllib.parse.quote(param_str, safe=""),
+    ])
+    signing_key = f"{urllib.parse.quote(cs_s, safe='')}&{urllib.parse.quote(ats_s, safe='')}"
+    sig = base64.b64encode(
+        hmac.new(signing_key.encode(), base.encode(), hashlib.sha1).digest()
+    ).decode()
+    oauth_params["oauth_signature"] = sig
+    auth_header = "OAuth " + ", ".join(
+        f'{urllib.parse.quote(k, safe="")}="{urllib.parse.quote(v, safe="")}"'
+        for k, v in sorted(oauth_params.items())
+    )
     req = urllib.request.Request(
         url, data=body, headers={
-            "Authorization": f"Bearer {token}",
+            "Authorization": auth_header,
             "Content-Type": "application/json",
-        }, method="POST",
+        }, method=method,
     )
     try:
         with urllib.request.urlopen(req, timeout=20) as r:
