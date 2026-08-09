@@ -10,6 +10,12 @@ theme        = "PaperMod"
 paginate     = 7
 enableGitInfo = true
 
+# Autoriser le HTML inline (ex: section d'accueil mise en forme)
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
 # Sections principales affichées sur la page d'accueil
 [params]
   env        = "production"
@@ -30,11 +36,18 @@ enableGitInfo = true
     Title    = "Fabrica Miracula"
     Content  = "<p>Bienvenue dans l'atelier. Ici, nous <strong>fabriquons</strong> des solutions concrètes pour reprendre la main sur notre outil numérique : réflexions sur la souveraineté, sécurité, et mise en réseau locale autour de <em>Hermes Agent</em>.</p><p>Un miracle, c'est une technique que l'on ne maîtrise pas encore.</p>"
 
-  # Liens sociaux affichés dans l'en-tête
-  [params.socialIcons]
-    github  = "https://github.com/voisin71-sys/fabrica-miracula"
-    x       = "https://x.com/"
-    rss     = "https://voisin71-sys.github.io/fabrica-miracula/index.xml"
+  # Liens sociaux affichés dans l'en-tête (format liste attendu par PaperMod)
+  [[params.socialIcons]]
+    icon = "github"
+    url = "https://github.com/voisin71-sys/fabrica-miracula"
+
+  [[params.socialIcons]]
+    icon = "x"
+    url = "https://x.com/"   # À remplacer par votre handle X (ex: https://x.com/fabricamiracula)
+
+  [[params.socialIcons]]
+    icon = "rss"
+    url = "https://voisin71-sys.github.io/fabrica-miracula/index.xml"
 
 # Menu principal
 [[menu.main]]

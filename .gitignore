@@ -1,0 +1,13 @@
+# Fichiers générés par Hugo (reconstruits lors du déploiement)
+/public/
+/resources/_gen/
+/hugo_stats.json
+.hugo_build.lock
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+
+# Éditeurs
+*.swp
+*~
