@@ -5,6 +5,7 @@ date: 2026-08-09
 draft: false
 tags: ["configuration", "Hermes Agent", "LM Studio", "souveraineté", "Apple Silicon"]
 categories: ["Réflexion"]
+images: ["/images/ma-configuration-hermes-2026.png"]
 ---
 
 Beaucoup se contentent d'un assistant dans le navigateur. Moi, je voulais un

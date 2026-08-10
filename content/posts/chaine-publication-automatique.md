@@ -5,6 +5,7 @@ date: 2026-08-09
 draft: false
 tags: ["automatisation", "GitHub Actions", "Hugo", "RSS", "souveraineté"]
 categories: ["Réflexion"]
+images: ["/images/chaine-publication-automatique.png"]
 ---
 
 Écrire un article, puis le voir apparaître sur le site **et** être annoncé sur
