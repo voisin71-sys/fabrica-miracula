@@ -5,7 +5,8 @@ date: 2026-08-09
 draft: false
 tags: ["Hermes Agent", "macOS", "tutoriel"]
 categories: ["Tutoriel"]
-images: ["/images/installer-hermes-agent.png"]
+cover:
+  image: "images/installer-hermes-agent.png"
 ---
 
 Ce guide vous accompagne pas à pas pour installer **Hermes Agent** sur macOS.

@@ -5,7 +5,8 @@ date: 2026-08-09
 draft: false
 tags: ["souveraineté", "philosophie"]
 categories: ["Réflexion"]
-images: ["/images/manifeste-souverainete.png"]
+cover:
+  image: "images/manifeste-souverainete.png"
 ---
 
 Nous avons peu à peu confié nos outils, nos données et nos routines à des

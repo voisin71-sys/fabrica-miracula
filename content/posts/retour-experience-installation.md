@@ -5,7 +5,8 @@ date: 2026-08-09
 draft: false
 tags: ["retour d'expérience", "installation", "LLM", "Hugo", "GitHub Pages"]
 categories: ["Récit"]
-images: ["/images/retour-experience-installation.png"]
+cover:
+  image: "images/retour-experience-installation.png"
 ---
 
 Quand on décide de « fabriquer » son propre espace sur le web, rien ne se passe

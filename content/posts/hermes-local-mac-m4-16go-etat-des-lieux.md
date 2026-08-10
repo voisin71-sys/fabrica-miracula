@@ -6,7 +6,8 @@ draft: false
 slug: "hermes-local-mac-m4-16go-etat-des-lieux"
 tags: ["Hermes Agent", "LM Studio", "Mac M4", "Ollama", "Gemma", "Qwen", "souveraineté"]
 categories: ["Réflexion"]
-images: ["/images/hermes-local-mac-m4-16go-etat-des-lieux.png"]
+cover:
+  image: "images/hermes-local-mac-m4-16go-etat-des-lieux.png"
 ---
 
 **LM Studio vs Ollama, Gemma vs Qwen — et ce que disent vraiment les utilisateurs Mac M4.**
