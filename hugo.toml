@@ -65,6 +65,12 @@ enableGitInfo = true
   url    = "/about/"
   weight = 3
 
+# Logo officiel du site (badge FABRICA MIRACULA)
+[params.label]
+  text  = "Fabrica Miracula"
+  icon  = "logo.png"
+  iconHeight = 40
+
 # Réglages du serveur de prévisualisation local
 [server]
   port = 1313
