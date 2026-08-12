@@ -28,10 +28,15 @@ import urllib.error
 import urllib.parse
 import xml.etree.ElementTree as ET
 from pathlib import Path
+from dotenv import load_dotenv
+
+# Charger les variables d'environnement depuis le fichier .env
+load_dotenv()
 
 SITE_URL = os.environ.get("SITE_URL", "https://voisin71-sys.github.io/fabrica-miracula/")
 RSS_URL = SITE_URL.rstrip("/") + "/index.xml"
 STATE_FILE = Path(os.environ.get("GITHUB_WORKSPACE", ".")) / ".distribute_state.json"
+
 
 # Limites de caractères par réseau
 LIMITS = {"x": 280, "facebook": 63206, "instagram": 2200, "linkedin": 3000}
