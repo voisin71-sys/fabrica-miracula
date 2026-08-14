@@ -28,14 +28,23 @@ import urllib.error
 import urllib.parse
 import xml.etree.ElementTree as ET
 from pathlib import Path
-from dotenv import load_dotenv
-
-# Charger les variables d'environnement depuis le fichier .env
-load_dotenv()
+try:
+    from dotenv import load_dotenv
+    # Charger les variables d'environnement depuis le fichier .env (usage local uniquement)
+    load_dotenv()
+except Exception:
+    # dotenv indisponible (ex. runner CI GitHub Actions) — on se contente de os.environ
+    pass
 
 SITE_URL = os.environ.get("SITE_URL", "https://voisin71-sys.github.io/fabrica-miracula/")
 RSS_URL = SITE_URL.rstrip("/") + "/index.xml"
-STATE_FILE = Path(os.environ.get("GITHUB_WORKSPACE", ".")) / ".distribute_state.json"
+# Emplacement du fichier d'état (idempotence). Sur CI on peut le surcharger
+# via DISTRIBUTE_STATE_FILE pour le persister sur une branche dédiée.
+_state_path = os.environ.get("DISTRIBUTE_STATE_FILE")
+if _state_path:
+    STATE_FILE = Path(_state_path)
+else:
+    STATE_FILE = Path(os.environ.get("GITHUB_WORKSPACE", ".")) / ".distribute_state.json"
 
 
 # Limites de caractères par réseau
@@ -324,23 +333,35 @@ def main():
         return
 
     networks = ["x", "facebook", "instagram", "linkedin"]
+    success_count = 0
     for net in networks:
         msg = build_message(title, link, desc, net)
         if dry_run:
             print(f"\n--- {net.upper()} (dry-run) ---\n{msg}\n")
             continue
-        if net == "x":
-            post_x(msg)
-        elif net == "linkedin":
-            post_linkedin(msg, link)
-        else:
-            post_meta(msg, net)
+        ok = False
+        try:
+            if net == "x":
+                ok = post_x(msg)
+            elif net == "linkedin":
+                ok = post_linkedin(msg, link)
+            else:
+                ok = post_meta(msg, net)
+        except Exception as e:
+            log(f"{net} : exception — {e}")
+        if ok:
+            success_count += 1
         time.sleep(2)  # courtoisie anti-rate-limit
 
     if not dry_run:
-        state["last_guid"] = guid
-        save_state(state)
-        log("État mis à jour.")
+        if success_count > 0:
+            state["last_guid"] = guid
+            save_state(state)
+            log(f"État mis à jour ({success_count} réseau(x) OK).")
+        else:
+            # Aucune publication réussie : on NE met pas à jour l'état pour
+            # permettre une nouvelle tentative au prochain run.
+            log("Aucune publication réussie — état NON mis à jour (nouvel essai au prochain run).")
 
 
 if __name__ == "__main__":

@@ -8,6 +8,14 @@
 .DS_Store
 Thumbs.db
 
+# Secrets locaux (JAMAIS versionnés — les clés API vont dans GitHub Secrets)
+.env
+.env.*
+!.env.example
+
+# Fichier d'état de diffusion (généré, persisté ailleurs)
+.distribute_state.json
+
 # Éditeurs
 *.swp
 *~

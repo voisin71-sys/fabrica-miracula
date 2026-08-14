@@ -1,5 +1,15 @@
-# Distribution automatique du site vers X / Facebook / Instagram
-# Déclenché à la fin du déploiement Pages (needs: deploy du workflow hugo.yaml).
+# Distribution automatique du site vers X / Facebook / Instagram / LinkedIn.
+#
+# Stratégie d'idempotence :
+#   Le fichier d'état (.distribute_state.json) est persisté sur une branche
+#   dédiée `distribute-state` (et non dans le repo principal) pour survivre
+#   entre les runs. Il mémorise le GUID du dernier article diffusé.
+#
+# Déclencheurs :
+#   1. À la fin du déploiement Pages (workflow_run -> hugo.yaml).
+#   2. Manuellement (workflow_dispatch) — pour tester sans republier.
+#   3. Quotidiennement à 08:00 UTC (schedule) — reprend un article si le
+#      déploiement a échoué et que la diffusion n'avait pas eu lieu.
 name: Distribute to social
 
 on:
@@ -7,22 +17,35 @@ on:
     workflows: ["Deploy Hugo site to Pages"]
     types: [completed]
   workflow_dispatch:
+  schedule:
+    - cron: "0 8 * * *"
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   distribute:
-    # Ne tourne que si le déploiement a réussi
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - name: Récupérer le dépôt
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Récupérer l'état de diffusion (branche distribute-state)
+        run: |
+          git fetch origin distribute-state:distribute-state || true
+          if git show distribute-state:.distribute_state.json >/dev/null 2>&1; then
+            git checkout distribute-state -- .distribute_state.json 2>/dev/null || true
+            echo "État chargé depuis distribute-state."
+          else
+            echo "Aucun état existant — premier run."
+          fi
 
       - name: Diffuser le dernier article
         env:
           SITE_URL: "https://voisin71-sys.github.io/fabrica-miracula/"
+          DISTRIBUTE_STATE_FILE: "${{ github.workspace }}/.distribute_state.json"
           X_API_KEY: ${{ secrets.X_API_KEY }}
           X_API_KEY_SECRET: ${{ secrets.X_API_KEY_SECRET }}
           X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
@@ -34,3 +57,18 @@ jobs:
           LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
           LINKEDIN_USER_ID: ${{ secrets.LINKEDIN_USER_ID }}
         run: python3 scripts/distribute.py
+
+      - name: Sauvegarder l'état de diffusion
+        if: always()
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git fetch origin distribute-state:distribute-state 2>/dev/null || git checkout --orphan distribute-state
+          git checkout distribute-state 2>/dev/null || true
+          git add .distribute_state.json
+          if git diff --cached --quiet; then
+            echo "Pas de changement d'état."
+          else
+            git commit -m "distribute: update state [skip ci]"
+            git push origin distribute-state
+          fi
