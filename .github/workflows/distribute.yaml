@@ -1,24 +1,22 @@
-# Distribution automatique du site vers X / Facebook / Instagram / LinkedIn.
+# Distribution automatique du site vers X (Twitter).
 #
 # Stratégie d'idempotence :
 #   Le fichier d'état (.distribute_state.json) est persisté sur une branche
 #   dédiée `distribute-state` (et non dans le repo principal) pour survivre
 #   entre les runs. Il mémorise le GUID du dernier article diffusé.
 #
-# Déclencheurs :
-#   1. À la fin du déploiement Pages (workflow_run -> hugo.yaml).
-#   2. Manuellement (workflow_dispatch) — pour tester sans republier.
-#   3. Quotidiennement à 08:00 UTC (schedule) — reprend un article si le
-#      déploiement a échoué et que la diffusion n'avait pas eu lieu.
-name: Distribute to social
+# Déclencheur :
+#   Uniquement APRÈS le déploiement réussi de Pages (workflow_run -> hugo.yaml).
+#   Un post X est publié pour le dernier article du flux RSS (1 post / article).
+#
+# Réseau actif : X uniquement (DISTRIBUTE_NETWORKS=x).
+# Meta / LinkedIn sont ignorés volontairement (clés non configurées).
+name: Distribute to X
 
 on:
   workflow_run:
     workflows: ["Deploy Hugo site to Pages"]
     types: [completed]
-  workflow_dispatch:
-  schedule:
-    - cron: "0 8 * * *"
 
 permissions:
   contents: write
@@ -42,20 +40,15 @@ jobs:
             echo "Aucun état existant — premier run."
           fi
 
-      - name: Diffuser le dernier article
+      - name: Diffuser le dernier article sur X
         env:
           SITE_URL: "https://voisin71-sys.github.io/fabrica-miracula/"
           DISTRIBUTE_STATE_FILE: "${{ github.workspace }}/.distribute_state.json"
+          DISTRIBUTE_NETWORKS: "x"
           X_API_KEY: ${{ secrets.X_API_KEY }}
           X_API_KEY_SECRET: ${{ secrets.X_API_KEY_SECRET }}
           X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
           X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
-          META_ACCESS_TOKEN: ${{ secrets.META_ACCESS_TOKEN }}
-          META_FB_PAGE_ID: ${{ secrets.META_FB_PAGE_ID }}
-          META_IG_USER_ID: ${{ secrets.META_IG_USER_ID }}
-          META_IG_DEFAULT_IMAGE: ${{ secrets.META_IG_DEFAULT_IMAGE }}
-          LINKEDIN_ACCESS_TOKEN: ${{ secrets.LINKEDIN_ACCESS_TOKEN }}
-          LINKEDIN_USER_ID: ${{ secrets.LINKEDIN_USER_ID }}
         run: python3 scripts/distribute.py
 
       - name: Sauvegarder l'état de diffusion

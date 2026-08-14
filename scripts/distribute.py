@@ -332,7 +332,15 @@ def main():
         log(f"Déjà diffusé (guid={guid}). Rien à faire.")
         return
 
-    networks = ["x", "facebook", "instagram", "linkedin"]
+    # Réseaux à diffuser. Par défaut : tous. On peut restreindre via la
+    # variable d'environnement DISTRIBUTE_NETWORKS (ex. "x" ou "x,linkedin").
+    # Cela permet d'activer un seul réseau sans warning parasite pour les autres.
+    raw = os.environ.get("DISTRIBUTE_NETWORKS")
+    if raw:
+        allowed = {n.strip().lower() for n in raw.split(",") if n.strip()}
+    else:
+        allowed = {"x", "facebook", "instagram", "linkedin"}
+    networks = [n for n in ("x", "facebook", "instagram", "linkedin") if n in allowed]
     success_count = 0
     for net in networks:
         msg = build_message(title, link, desc, net)
