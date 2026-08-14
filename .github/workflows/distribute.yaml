@@ -60,11 +60,21 @@ jobs:
 
       - name: Sauvegarder l'état de diffusion
         if: always()
+        env:
+          STATE_PATH: ${{ github.workspace }}/.distribute_state.json
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git fetch origin distribute-state:distribute-state 2>/dev/null || git checkout --orphan distribute-state
-          git checkout distribute-state 2>/dev/null || true
+          # Conserver le fichier d'état généré avant de changer de branche
+          cp "$STATE_PATH" /tmp/distribute_state.json
+          git fetch origin distribute-state 2>/dev/null || true
+          if git rev-parse --verify origin/distribute-state >/dev/null 2>&1; then
+            git checkout -B distribute-state origin/distribute-state
+          else
+            git checkout --orphan distribute-state
+            git rm -rf --cached . >/dev/null 2>&1 || true
+          fi
+          cp /tmp/distribute_state.json .distribute_state.json
           git add .distribute_state.json
           if git diff --cached --quiet; then
             echo "Pas de changement d'état."
