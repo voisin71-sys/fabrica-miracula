@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2E8B57;stop-opacity:1"/>
+      <stop offset="100%" style="stop-color:#1E6B43;stop-opacity:1"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="512" height="512" fill="#0f172a"/>
+  
+  <!-- Central shield (symbol of sovereignty) -->
+  <path d="M256 48 L352 88 L352 192 C352 264 256 368 256 368 C256 368 160 264 160 192 L160 88 Z" 
+        fill="url(#shieldGrad)" stroke="#4ade80" stroke-width="3"/>
+  
+  <!-- Lock icon inside shield -->
+  <rect x="232" y="220" width="48" height="56" rx="8" fill="#1e6b43"/>
+  <path d="M244 228 L268 228 M256 276 C256 290 244 300 232 300 C220 300 208 290 208 276" 
+        stroke="#fbbf24" stroke-width="4" fill="none"/>
+  
+  <!-- Local server icon -->
+  <rect x="160" y="120" width="192" height="24" rx="4" fill="#3b82f6"/>
+  <text x="256" y="144" text-anchor="middle" font-family="sans-serif" font-size="14" fill="white">LOCAL</text>
+  
+  <!-- Cloud icon (protected) -->
+  <path d="M208 96 C170 96 150 124 156 156 C132 160 116 184 120 220" 
+        fill="#6366f1"/>
+  <path d="M272 96 C310 96 330 124 324 156 C348 160 364 184 360 220" 
+        fill="#a855f7"/>
+  
+  <!-- Connection lines (secure) -->
+  <path d="M256 96 L256 40" stroke="#22d3ee" stroke-width="2" opacity="0.6"/>
+  
+  <!-- Shield glow effect -->
+  <path d="M256 180 A60 60 0 1 1 256 240 A60 60 0 1 1 256 180" 
+        fill="none" stroke="#4ade80" stroke-width="3" opacity="0.3">
+    <animate attributeName="opacity" values="0.3;0.6;0.3" dur="4s" repeatCount="indefinite"/>
+  </path>
+  
+  <!-- Data flow arrows -->
+  <circle cx="192" cy="176" r="6" fill="#fbbf24">
+    <animateTransform attributeName="transform" type="rotate" from="-45 192 176" to="45 192 176" dur="3s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="320" cy="176" r="6" fill="#fbbf24">
+    <animateTransform attributeName="transform" type="rotate" from="-45 320 176" to="45 320 176" dur="3s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Checkmarks for security features -->
+  <path d="M208 196 L216 204 M216 204 L224 196 M232 196 L240 204" 
+        stroke="#22c55e" stroke-width="3" fill="none"/>
+  
+  <!-- Text labels -->
+  <text x="256" y="84" text-anchor="middle" font-family="sans-serif" font-size="12" fill="#94a3b8">INFRASTRUCTURE</text>
+  <text x="256" y="390" text-anchor="middle" font-family="sans-serif" font-size="14" fill="#fbbf24">SOVEREIGNETÉ LOCALE</text>
+  
+  <!-- Security badges -->
+  <circle cx="80" cy="440" r="28" fill="#1e6b43"/>
+  <path d="M75 426 L90 440 M90 440 L105 426" stroke="#fbbf24" stroke-width="3" fill="none"/>
+  
+  <circle cx="128" cy="440" r="28" fill="#1e6b43"/>
+  <path d="M123 426 L138 440 M138 440 L153 426" stroke="#fbbf24" stroke-width="3" fill="none"/>
+  
+  <circle cx="176" cy="440" r="28" fill="#1e6b43"/>
+  <path d="M171 426 L186 440 M186 440 L201 426" stroke="#fbbf24" stroke-width="3" fill="none"/>
+  
+  <!-- Legend -->
+  <text x="50" y="470" font-family="sans-serif" font-size="9" fill="#6b7280">✓ Données locales</text>
+  <text x="130" y="470" font-family="sans-serif" font-size="9" fill="#6b7280">✓ Sécurité maximale</text>
+  <text x="210" y="470" font-family="sans-serif" font-size="9" fill="#6b7280">✓ Contrôle total</text>
+  
+</svg>
