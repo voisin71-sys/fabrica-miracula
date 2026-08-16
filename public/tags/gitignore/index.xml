@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Gitignore on Fabrica Miracula</title><link>https://voisin71-sys.github.io/fabrica-miracula/tags/gitignore/</link><description>Recent content in Gitignore on Fabrica Miracula</description><generator>Hugo</generator><language>fr</language><lastBuildDate>Sat, 15 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://voisin71-sys.github.io/fabrica-miracula/tags/gitignore/index.xml" rel="self" type="application/rss+xml"/><item><title>Pourquoi mes articles n'apparaissaient pas sur GitHub Pages (et comment j'ai réparé)</title><link>https://voisin71-sys.github.io/fabrica-miracula/posts/articles-invisibles-github-pages/</link><pubDate>Sat, 15 Aug 2026 00:00:00 +0000</pubDate><guid>https://voisin71-sys.github.io/fabrica-miracula/posts/articles-invisibles-github-pages/</guid><description>&lt;h2 id="symptôme"&gt;Symptôme&lt;/h2&gt;
+&lt;p&gt;J&amp;rsquo;écrivais mes articles dans &lt;code&gt;content/posts/&lt;/code&gt;, je faisais &lt;code&gt;git push&lt;/code&gt;, et pourtant
+&lt;strong&gt;rien ne s&amp;rsquo;affichait sur le site&lt;/strong&gt;. L&amp;rsquo;URL &lt;code&gt;voisin71-sys.github.io/fabrica-miracula/&lt;/code&gt;
+servait une page d&amp;rsquo;accueil vide ou figée, sans mes nouveaux posts. Aucune erreur
+Git, aucun message — le silence complet.&lt;/p&gt;
+&lt;h2 id="diagnostic"&gt;Diagnostic&lt;/h2&gt;
+&lt;p&gt;Trois vérifications ont suffi à trouver la cause :&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 1. Les articles sont-ils bien dans le repo ?&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;ls content/posts/*.md &lt;span style="color:#75715e"&gt;# -&amp;gt; 19 fichiers, OK&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 2. Le site se build-il en local ?&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;hugo --gc --minify &lt;span style="color:#75715e"&gt;# -&amp;gt; 116 pages générées, OK&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;&lt;span style="color:#75715e"&gt;# 3. Le dossier public/ est-il sur GitHub ?&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style="display:flex;"&gt;&lt;span&gt;git ls-tree origin/main | grep public &lt;span style="color:#75715e"&gt;# -&amp;gt; RIEN. C&amp;#39;est ça.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;La cause&lt;/strong&gt; : GitHub Pages (configuré en &lt;em&gt;Deploy from a branch → main / root&lt;/em&gt;)
+sert le dossier &lt;code&gt;public/&lt;/code&gt; de la branche &lt;code&gt;main&lt;/code&gt;. Or mon &lt;code&gt;.gitignore&lt;/code&gt; contenait
+&lt;code&gt;/public/&lt;/code&gt; — donc Hugo générait les pages localement, mais &lt;strong&gt;git refusait de
+versionner &lt;code&gt;public/&lt;/code&gt;&lt;/strong&gt;, et GitHub ne recevait jamais les fichiers HTML.&lt;/p&gt;</description></item></channel></rss>
