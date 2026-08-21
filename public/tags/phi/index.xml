@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Phi on Fabrica Miracula</title><link>https://voisin71-sys.github.io/fabrica-miracula/tags/phi/</link><description>Recent content in Phi on Fabrica Miracula</description><generator>Hugo</generator><language>fr</language><lastBuildDate>Sat, 15 Aug 2026 23:17:09 +0200</lastBuildDate><atom:link href="https://voisin71-sys.github.io/fabrica-miracula/tags/phi/index.xml" rel="self" type="application/rss+xml"/><item><title>Benchmark de ma bibliothèque LLM locale (BIONIC) sur Mac M4 : 5 modèles testés via Ollama</title><link>https://voisin71-sys.github.io/fabrica-miracula/posts/benchmark-bionic-llm-local/</link><pubDate>Sat, 15 Aug 2026 00:00:00 +0000</pubDate><guid>https://voisin71-sys.github.io/fabrica-miracula/posts/benchmark-bionic-llm-local/</guid><description>&lt;h2 id="résumé"&gt;Résumé&lt;/h2&gt;
-&lt;p&gt;On a testé &lt;strong&gt;5 modèles de ma bibliothèque locale&lt;/strong&gt; (&lt;code&gt;/Volumes/DATA_CENTER/BIONIC LLM MODELS&lt;/code&gt;)
-directement dans Ollama sur un Mac M4 17 Go, sans aucun téléchargement réseau.
-Résultat : &lt;strong&gt;Gemma 4 4B est le plus rapide&lt;/strong&gt; (0.6s), &lt;strong&gt;Llama 3.1 8B le plus
-polyvalent&lt;/strong&gt; (contexte 16K). Tous deux sont 100% souverains.&lt;/p&gt;
-&lt;h2 id="pourquoi-tester-sa-propre-bibliothèque"&gt;Pourquoi tester sa propre bibliothèque&lt;/h2&gt;
-&lt;p&gt;Les modèles ne viennent pas que d&amp;rsquo;Ollama Hub. Ma bibliothèque BIONIC contient
-des GGUF locaux (Qwen, Phi, Gemma, Llama) que j&amp;rsquo;utilise sans dépendre du
-réseau. Ollama permet de les charger via un &lt;strong&gt;Modelfile&lt;/strong&gt; :&lt;/p&gt;</description></item></channel></rss>
