@@ -5,7 +5,7 @@ draft: false
 description: "# Pourquoi un LLM local change la donne"
 tags: ["llm-local", "souverainete", "ia"]
 cover:
-  image: "/images/pourquoi_un_llm_local_change_la_donne.png"
+  image: "images/pourquoi_un_llm_local_change_la_donne.png"
   alt: "Illustration Art Nouveau pour l'article Pourquoi un LLM local change la donne"
   caption: "Généré avec ComfyUI"
 ---

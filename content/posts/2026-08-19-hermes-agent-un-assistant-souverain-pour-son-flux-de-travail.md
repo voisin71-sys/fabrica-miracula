@@ -4,6 +4,10 @@ date: 2026-08-19T10:09:30+02:00
 draft: false
 description: "# Hermes Agent : un assistant souverain pour son flux de travail"
 tags: ["hermes", "agent", "ia-local"]
+cover:
+  image: "images/hermes_agent__un_assistant_souverain_pour_son_flux_de_travai.png"
+  alt: "Illustration Art Nouveau pour l'article Hermes Agent : un assistant souverain pour son flux de travail"
+  caption: "Généré avec ComfyUI"
 ---
 
 # Hermes Agent : un assistant souverain pour son flux de travail

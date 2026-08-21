@@ -1,6 +1,5 @@
 # Déploiement automatique de Fabrica Miracula sur GitHub Pages
-# À chaque push sur "main", le site est reconstruit et publié.
-# Utilise le GITHUB_TOKEN (aucun token personnel requis pour le déploiement).
+# À chaque push sur "main", le site est reconstruit et publié sur la branche gh-pages.
 name: Deploy Hugo site to Pages
 
 on:
@@ -9,9 +8,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 concurrency:
   group: "pages"
@@ -31,28 +28,22 @@ jobs:
         run: |
           wget -O "${{ runner.temp }}/hugo.deb" "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb"
           sudo dpkg -i "${{ runner.temp }}/hugo.deb"
+
       - name: Récupérer le dépôt (avec sous-modules)
         uses: actions/checkout@v4
         with:
           submodules: recursive
           fetch-depth: 0
-      - name: Configurer GitHub Pages
-        id: pages
-        uses: actions/configure-pages@v5
+
       - name: Construire le site
         run: hugo --gc --minify --baseURL "https://voisin71-sys.github.io/fabrica-miracula/"
-      - name: Envoyer l'artefact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./public
 
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Déployer sur GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Déployer sur gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          publish_branch: gh-pages
+          cname: ""
+          enable_jekyll: false
+          keep_files: false

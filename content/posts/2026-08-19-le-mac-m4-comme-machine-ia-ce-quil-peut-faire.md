@@ -5,7 +5,7 @@ draft: false
 description: "# Le Mac M4 comme machine IA : ce qu'il peut faire"
 tags: ["mac-m4", "metal", "ia-local"]
 cover:
-  image: "/images/le_mac_m4_comme_machine_ia__ce_quil_peut_faire.png"
+  image: "images/le_mac_m4_comme_machine_ia__ce_quil_peut_faire.png"
   alt: "Illustration Art Nouveau pour l'article Le Mac M4 comme machine IA : ce qu'il peut faire"
   caption: "Généré avec ComfyUI"
 ---
