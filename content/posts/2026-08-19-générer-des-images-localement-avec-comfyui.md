@@ -5,7 +5,7 @@ draft: false
 description: "# Générer des images localement avec ComfyUI : un guide pour maîtriser Stable Diffusion sur Mac M4"
 tags: ["comfyui", "images", "diffusion"]
 cover:
-  image: "/images/générer_des_images_localement_avec_comfyui.png"
+  image: "images/generer-des-images-localement-avec-comfyui.png"
   alt: "Illustration Art Nouveau pour l'article Générer des images localement avec ComfyUI"
   caption: "Généré avec ComfyUI"
 ---

@@ -5,7 +5,7 @@ draft: false
 description: "# Protéger ses données avec une IA locale"
 tags: ["securite", "donnees", "confidentialite"]
 cover:
-  image: "/images/protéger_ses_données_avec_une_ia_locale.png"
+  image: "images/proteger-ses-donnees-avec-une-ia-locale.png"
   alt: "Illustration Art Nouveau pour l'article Protéger ses données avec une IA locale"
   caption: "Généré avec ComfyUI"
 ---
