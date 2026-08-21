@@ -2,11 +2,11 @@
 title: "Auto-héberger son blog : pourquoi et comment"
 date: 2026-08-21T20:15:02+02:00
 draft: false
-description: "## Auto-héberger son blog : pourquoi et comment reprendre le contrôle de votre voix"
+description: "Si vous avez déjà tenu un journal en ligne, vous avez probablement expérimenté une forme de dépendance : vous êtes locataire, pas propriétaire."
 tags: ["auto-hebergement", "hugo", "blog"]
 cover:
-  image: "/images/auto-héberger_son_blog__pourquoi_et_comment.png"
-  alt: "Illustration Art Nouveau pour l'article Auto-héberger son blog : pourquoi et comment"
+  image: "images/auto-héberger_son_blog__pourquoi_et_comment.png"
+  alt: "Illustration néo-impressionniste pour l'article Auto-héberger son blog : pourquoi et comment"
   caption: "Généré avec ComfyUI"
 ---
 
