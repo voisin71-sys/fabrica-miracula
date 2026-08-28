@@ -4,6 +4,10 @@ date: 2026-08-28T21:22:29+02:00
 draft: false
 description: "On a tous connu ce moment de flottement avant de coller une portion de code sensible, un brouillon de stratégie d'entreprise ou une note..."
 tags: ["hermes", "agent", "ia-local"]
+cover:
+  image: "images/hermes_agent_un_assistant_souverain_pour_son_flux_de_travail.png"
+  alt: "Illustration pointillisme pour l'article Hermes Agent : un assistant souverain pour son flux de travail"
+  caption: "Généré avec ComfyUI (Zombie, style pointillisme)"
 ---
 
 **Hermes Agent : un assistant souverain pour son flux de travail**
