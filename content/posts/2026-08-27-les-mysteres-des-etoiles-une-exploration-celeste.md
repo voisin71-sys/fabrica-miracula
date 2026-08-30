@@ -4,9 +4,13 @@ date: 2026-08-27T06:43:02+02:00
 draft: false
 description: "Depuis que l'humanité lève les yeux vers le ciel nocturne, une question fondamentale nous hante : qu'y a-t-il au-delà de ce que nous..."
 tags: ["redaction-manuelle"]
+cover:
+  image: "images/2026-08-27-les-mysteres-des-etoiles-une-exploration-celeste.png"
+  alt: "Illustration impressionniste pour l'article Les mystères des étoiles"
+  caption: "Généré avec ComfyUI"
 ---
 
-![Couverture](/images/2026-08-27-les-mysteres-des-etoiles-une-exploration-celeste.png)
+![Couverture](images/2026-08-27-les-mysteres-des-etoiles-une-exploration-celeste.png)
 
 Depuis que l'humanité lève les yeux vers le ciel nocturne, une question fondamentale nous hante : qu'y a-t-il au-delà de ce que nous pouvons voir ? Les étoiles, ces points de lumière scintillants, ont longtemps été nos premières boussoles, nos premiers calendriers et, surtout, nos premiers mystères. Elles représentent l'ultime frontière, un espace d'exploration qui, bien que physiquement lointain, résonne profondément avec notre désir intrinsèque de comprendre le fonctionnement du monde.
 

@@ -4,6 +4,10 @@ date: 2026-08-30T06:16:23+02:00
 draft: false
 description: "On a souvent cette sensation d'être un locataire dans le monde numérique actuel. Chaque fois que nous interagissons avec une intelligence..."
 tags: ["redaction-manuelle"]
+cover:
+  image: "images/gemma-4-12b-configuration-ollama.png"
+  alt: "Illustration art deco pour l'article Faire tourner son propre LLM en local"
+  caption: "Généré avec ComfyUI"
 ---
 
 On a souvent cette sensation d'être un locataire dans le monde numérique actuel. Chaque fois que nous interagissons avec une intelligence artificielle via une interface web, nos données, nos réflexions et nos projets traversent des frontières invisibles pour finir dans les serveurs de géants technologiques. Pour beaucoup, c'est le prix à payer pour la commodité. Mais pour ceux qui nous lisent sur Fabrica Miracula, il existe une autre voie : celle de la souveraineté. L'idée n'est pas de rejeter le progrès, mais de reprendre les commandes de nos outils de production intellectuelle.

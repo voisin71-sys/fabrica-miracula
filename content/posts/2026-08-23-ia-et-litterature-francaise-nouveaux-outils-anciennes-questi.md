@@ -4,6 +4,10 @@ date: 2026-08-23T13:03:33+02:00
 draft: false
 description: "L'histoire de la langue française est une histoire de tentatives pour garder le fil. Les romans, les poèmes, les essais : ils sont nés de..."
 tags: ["litterature", "creation", "ecriture"]
+cover:
+  image: "images/ia-et-litterature-francaise.png"
+  alt: "Illustration art nouveau pour l'article IA et littérature française"
+  caption: "Généré avec ComfyUI"
 ---
 
 # IA et littérature française : nouveaux outils, anciennes questions
