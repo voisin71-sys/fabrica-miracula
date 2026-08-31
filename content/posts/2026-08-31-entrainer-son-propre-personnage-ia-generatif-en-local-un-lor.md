@@ -2,7 +2,7 @@
 title: "Entraîner son propre personnage IA génératif en local : un LoRA Flux sur sa RTX 3060 12 Go (ComfyUI + kohya_ss), et la souveraineté créative face aux services cloud"
 date: 2026-08-31T06:09:36+02:00
 draft: false
-description: "Il y a quelques années, l'idée de "créer" une intelligence artificielle était réservée aux laboratoires de recherche dotés de clusters de..."
+description: "Il y a quelques années, l'idée de « créer » une intelligence artificielle était réservée aux laboratoires de recherche dotés de clusters de..."
 tags: ["redaction-manuelle"]
 cover:
   image: "images/2026-08-31-entrainer-personnage-ia-generatif.png"
