@@ -4,6 +4,10 @@ date: 2026-08-31T06:09:36+02:00
 draft: false
 description: "Il y a quelques années, l'idée de "créer" une intelligence artificielle était réservée aux laboratoires de recherche dotés de clusters de..."
 tags: ["redaction-manuelle"]
+cover:
+  image: "images/2026-08-31-entrainer-personnage-ia-generatif.png"
+  alt: "Illustration art nouveau pour l'article Entraîner son propre personnage IA"
+  caption: "Généré avec Flux.1 dev sur Zombie (ComfyUI, 100 % local)"
 ---
 
 **Entraîner son propre personnage IA génératif en local : un LoRA Flux sur sa RTX 3060 12 Go (ComfyUI + kohya_ss), et la souveraineté créative face aux services cloud**
