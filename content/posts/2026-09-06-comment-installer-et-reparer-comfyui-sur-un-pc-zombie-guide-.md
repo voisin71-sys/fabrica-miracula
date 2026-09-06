@@ -4,6 +4,10 @@ date: 2026-09-06T06:09:41+02:00
 draft: false
 description: "Nous avons tous, quelque part dans un coin de notre bureau ou au fond d'un placard, ce fameux ordinateur qui semble avoir rendu l'âme. Un..."
 tags: ["redaction-manuelle"]
+cover:
+  image: "images/fabrica_cover_00003_.png"
+  alt: "Couverture générée pour cet article"
+  caption: "Généré avec ComfyUI"
 ---
 
 **Comment installer et réparer ComfyUI sur un PC Zombie : guide complet pour redonner vie à votre matériel**

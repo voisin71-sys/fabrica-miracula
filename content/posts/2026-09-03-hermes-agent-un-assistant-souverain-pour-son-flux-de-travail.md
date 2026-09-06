@@ -2,8 +2,12 @@
 title: "Hermes Agent : un assistant souverain pour son flux de travail"
 date: 2026-09-03T07:37:22+02:00
 draft: false
-description: "Nous vivons une époque paradoxale. D'un côté, l'intelligence artificielle semble être partout, capable de rédiger des mails, de générer du..."
+description: "Nous vivons une époque paradoxale. D'un côté, l'intelligence artificielle semble être partout, capable de rédiger des mails, de générer du code complexe ou d'analyser des données en quelques secondes. De l'autre, cette puissance repose presque exclusivement sur des infrastructures propriétaires, situées à des milliers de kilomètres, où nos données personnelles et professionnelles sont traitées comme du carburant pour des modèles dont nous ne contrôlons ni les règles, ni la confidentialité."
 tags: ["hermes", "agent", "ia-local"]
+cover:
+  image: "images/fabrica_cover_00001_.png"
+  alt: "Couverture générée pour cet article"
+  caption: "Généré avec ComfyUI"
 ---
 
 **Hermes Agent : un assistant souverain pour son flux de travail**

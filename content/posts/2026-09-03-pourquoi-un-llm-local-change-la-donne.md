@@ -2,8 +2,12 @@
 title: "Pourquoi un LLM local change la donne"
 date: 2026-09-03T07:17:30+02:00
 draft: false
-description: "On a tous ressenti cette petite étincelle de magie lors des premières démonstrations d'intelligence artificielle générative. Voir une..."
+description: "On a tous ressenti cette petite étincelle de magie lors des premières démonstrations d'intelligence artificielle générative. Voir une machine structurer une pensée complexe, rédiger un code fonctionnel ou synthétiser des heures de lecture en quelques secondes est fascinant. Mais avec cet émerveillement, une question s'est rapidement imposée : à qui appartient cette magie ? Et surtout, où vont nos données quand nous nourrissons ces machines ?"
 tags: ["llm-local", "souverainete", "ia"]
+cover:
+  image: "images/fabrica_cover_00002_.png"
+  alt: "Couverture générée pour cet article"
+  caption: "Généré avec ComfyUI"
 ---
 
 **Pourquoi un LLM local change la donne**
